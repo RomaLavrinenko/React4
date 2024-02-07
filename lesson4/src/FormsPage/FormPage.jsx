@@ -2,6 +2,7 @@ import style from './FormPage.module.css';
 import { useForm } from 'react-hook-form';
 import PageComments from './PageComments';
 import { useState } from 'react';
+import {AuthService} from '../service/ApiSevrice.js'
 const FormPage = () => {
     const [email , setEmail] = useState();
     const [id , setId] = useState();
@@ -9,13 +10,14 @@ const FormPage = () => {
     const postDetails = (details) =>{
         setEmail(details.email);
         console.log(details);
-        fetch('https://jsonplaceholder.typicode.com/users',{
-            method: 'POST',
-            body: JSON.stringify(details)})
-        .then((response) => response.json())
-        .then((data) => {
-            setId(data.id);
-            console.log(data);});  
+        // fetch('https://jsonplaceholder.typicode.com/users',{
+        //     method: 'POST',
+        //     body: JSON.stringify(details)})
+        // .then((response) => response.json())
+        // .then((data) => {
+        //     setId(data.id);
+        //     console.log(data);}); 
+        AuthService.handleLogin({details, setId}); 
         const box = document.getElementsByClassName('FormPage_box__f2jVR');
         box[0].style.display = 'none'; 
     }
